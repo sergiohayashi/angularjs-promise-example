@@ -2,8 +2,45 @@
 <html>
 <head>
     <title></title>
-</head>
-<body>
+    <script>
+        var app= angular.module( 'myapp', [])
+                .controller( 'MyCtrl', MyCtrl);
 
+        function MyCtrl( $q, $timeout) {
+            function f() {
+                var deferred = $q.defer();
+                $timeout( function() {
+                    deferred.resolve( 'f');
+                }, 100);
+                return deferred.promise;
+            }
+            function g() {
+                var deferred = $q.defer();
+                $timeout( function() {
+                    deferred.resolve( 'g');
+                }, 500);
+                return deferred.promise;
+            }
+            function h() {
+                var deferred = $q.defer();
+                $timeout( function() {
+                    deferred.resolve( 'h');
+                }, 500);
+                return deferred.promise;
+            }
+
+            f()
+                    .then( function( msg){ console.log( 'received '+ msg); return g()})
+                    .then( function( msg){ console.log( 'received '+ msg); return h()})
+                    .then( function( msg){
+                        console.log( 'received '+ msg);
+                    }, function() {
+                        console.log( 'error');
+                    });
+        }
+    </script>
+</head>
+<body ng-controller=""MyCtrl>
+    Promise in AngularJS
 </body>
 </html>
