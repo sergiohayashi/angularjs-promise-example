@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script>
         var app= angular.module( 'myapp', [])
                 .controller( 'MyCtrl', MyCtrl);
@@ -30,8 +31,12 @@
             }
 
             f()
-                    .then( function( msg){ console.log( 'received '+ msg); return g()})
-                    .then( function( msg){ console.log( 'received '+ msg); return h()})
+                    .then( function( msg){
+                        console.log( 'received '+ msg);
+                        return g()})
+                    .then( function( msg){
+                        console.log( 'received '+ msg);
+                        return h()})
                     .then( function( msg){
                         console.log( 'received '+ msg);
                     }, function() {
@@ -40,7 +45,7 @@
         }
     </script>
 </head>
-<body ng-controller=""MyCtrl>
+<body ng-controller="MyCtrl">
     Promise in AngularJS
 </body>
 </html>
